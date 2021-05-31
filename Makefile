@@ -10,12 +10,11 @@ push-base:
 push:
 	docker push borjagomez/cpdbackend 
 
-update:
-	docker build . -t borjagomez/cpdbackend
-	docker push gcr.io/cpd-infrastructure/cpdbackend
+deploy:
+	gcloud builds submit
 
 run:
-	docker-compose up
+	docker-compose up --build
 
 stop:
 	docker-compose down
