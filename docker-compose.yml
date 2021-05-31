@@ -6,4 +6,4 @@ services:
       - ./app:/usr/src/app
     ports:
       - "3000:3000"
-    command: npm-watch
+    command: bash -c "npm install && npm-watch"
