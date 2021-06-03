@@ -4,7 +4,6 @@ services:
     image: borjagomez/cpdbackend
     volumes:
       - ./app:/usr/src/app
-      - /usr/src/app/node_modules
     ports:
       - "3000:3000"
-    command: npm-watch
+    command: bash -c "cp -R /tmp/node_modules . && npm-watch"

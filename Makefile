@@ -19,5 +19,8 @@ run:
 stop:
 	docker-compose down
 
+bash-base:
+	docker run -it borjagomez/cpdbackend-base /bin/bash
+
 bash:
 	docker run -it borjagomez/cpdbackend /bin/bash
