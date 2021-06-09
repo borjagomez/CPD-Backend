@@ -5,7 +5,7 @@ const { Storage } = require("@google-cloud/storage");
 const bucketName = "cpd-images";
 
 exports.generateCPD = (req, res) => {
-  const storage = new Storage({ keyFilename: "./cpd-storage.json" });
+  const storage = new Storage({ keyFilename: "/tmp/cpd-storage-key.json" });
   const cpdid = uuidv4();
   const destination = `${cpdid}.png`;
 
