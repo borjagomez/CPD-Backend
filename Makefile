@@ -11,7 +11,8 @@ push:
 	docker push borjagomez/cpdbackend 
 
 deploy:
-	gcloud builds submit
+	docker tag borjagomez/cpdbackend gcr.io/cpd-infrastructure/cpdbackend
+	docker push gcr.io/cpd-infrastructure/cpdbackend
 
 run:
 	docker-compose up --build
