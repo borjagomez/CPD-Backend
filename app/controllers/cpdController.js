@@ -10,21 +10,14 @@ exports.generateCPD = (req, res) => {
   const cpdid = uuidv4();
   const destination = `${cpdid}.png`;
 
-  try {
-    shellExec("Rscript CPD/streamBTC.R").then(console.log).catch(console.log);
-  } catch (err) {
-    console.log(err);
-  }
-
-  async function uploadFile() {
-    await storage.bucket(bucketName).upload("CPD.png", {
+  return shellExec("Rscript CPD/streamBTC.R")
+  .then(() => {
+    return storage.bucket(bucketName).upload("CPD.png", {
       destination,
-    });
-
-    console.log(`${destination} uploaded to ${bucketName}`);
-  }
-
-  uploadFile().catch(console.error);
-
-  res.json({ cpdid });
+    })    
+  })
+  .then(() => {
+    return res.json({ cpdid });    
+  })
+  .catch(console.log);
 };
