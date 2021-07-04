@@ -13,6 +13,7 @@ push:
 deploy:
 	docker tag borjagomez/cpdbackend gcr.io/cpd-infrastructure/cpdbackend
 	docker push gcr.io/cpd-infrastructure/cpdbackend
+	gcloud run deploy cpdbackend --region=us-central1 --image=gcr.io/cpd-infrastructure/cpdbackend:latest --platform managed --port 3000
 
 run:
 	docker-compose up --build
