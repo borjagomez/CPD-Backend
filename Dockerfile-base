@@ -1,15 +1,17 @@
-FROM node:14
+FROM node:16
 
 # Create app directory
 WORKDIR /usr/src/app
+COPY jranke.asc /tmp/
 
 RUN npm install -g npm-watch
 
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get -y install r-base
-RUN apt-get -y install r-recommended
-RUN apt-get -y install r-base-dev
-RUN Rscript -e 'install.packages(c("cpm", "quantmod"), ,repos = "http://cran.us.r-project.org")'
-
+RUN apt -y update
+RUN apt -y upgrade
+RUN apt -y install r-base r-recommended r-base-dev r-recommended
+RUN apt-key add /tmp/jranke.asc
+RUN echo "deb http://cloud.r-project.org/bin/linux/debian buster-cran40/" >> /etc/apt/sources.list 
+RUN apt -y update
+RUN apt -y upgrade
+RUN Rscript -e 'install.packages(c("cpm", "quantmod", "xts", "R.utils"), repo="http://cran.rstudio.com/")'
 EXPOSE 3000

@@ -1,5 +1,5 @@
 build-base:
-	docker build -t borjagomez/cpdbackend-base - < Dockerfile-base
+	docker build . -t borjagomez/cpdbackend-base -f ./Dockerfile-base 
 
 build:
 	docker build . -t borjagomez/cpdbackend 

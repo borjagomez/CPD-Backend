@@ -26,7 +26,7 @@ setwd(this.dir)
 # Load required packages
 library(R.utils)   # for printf
 
-alpha = 0.05  # level of significance of the test
+alpha = 0.01  # level of significance of the test
 
 n1 = 10     # num of observations before the change point
 n2 = 10     # num of observations after the change point
@@ -37,7 +37,7 @@ n = n1+n2   # total number of observations
 # while the second sample consists of n_2 = 10 observations from a N(10,1).
 set.seed(0)
 rand_sample_1 = rnorm(n1, 0, 1)
-rand_sample_2 = rnorm(n2, 10, 1)
+rand_sample_2 = rnorm(n2, 2, 1)
 x <- c(rand_sample_1, rand_sample_2)
 
 # Plot the sequence of observations.
@@ -60,7 +60,7 @@ df = n-2
 t_alpha2 = qt(alpha/2, df, lower.tail = FALSE)
 
 # Output result
-printf("Two-sample hypothesis test with significance level %f \n", alpha)
+printf("\nTwo-sample hypothesis test with significance level %f \n", alpha)
 
 if (abs(T) > t_alpha2) {
   printf("Null hypothesis rejected: ")
@@ -69,3 +69,10 @@ if (abs(T) > t_alpha2) {
   printf("Null hypothesis not rejected: ")
   printf("We can't conclude change in mean at time %d \n", n1)
 }
+
+# Compute p-value
+p = 2*pt(abs(T), df = 18, lower.tail=FALSE)
+printf("\nCOMPUTATION OF P-VALUE\n")
+printf("Observed value of the test statistic is |t|=%f\n", abs(T))
+printf("Test will confirm CP for all ")
+printf("significance levels alpha > %f\n", p)
